@@ -20,22 +20,17 @@ export const fetchQuotes = async (count: number) => {
 };
 
 const Application = () => {
-  const [quote, setQuote] = useState<Array<Quote> | undefined>();
+  const [quotes, setQuotes] = useState<Array<Quote> | undefined>();
 
   function updateQuoteFromFetchQuotes(quoteAmount: number) {
-    fetchQuotes(quoteAmount).then(setQuote)
-
+    fetchQuotes(quoteAmount).then(setQuotes)
   }
 
-  useEffect(() => {
-    fetchQuotes(1).then(setQuote);
-  }, []);
-
-  if (!quote) return <Loading />;
+  if (!quotes) return <Loading />;
 
   return (
     <main className="w-full max-w-2xl py-16 mx-auto">
-      {quote.map(quote => (
+      {quotes.map(quote => (
         <InspirationalQuote key={quote.id} content={quote.content} source={quote.source} />
       ))}
       <Quotes
