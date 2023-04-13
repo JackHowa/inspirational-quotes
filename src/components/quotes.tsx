@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const Quotes = ({ children, onSubmit }: any) => {
-  const [quoteAmount, setQuoteAmount] = useState(1)
+  const [quoteAmount, setQuoteAmount] = useState<number>(1)
   return (
     <section className="flex flex-col gap-8">
       <form
