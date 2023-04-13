@@ -21,7 +21,11 @@ export const fetchQuotes = async (count: number) => {
 
 const Application = () => {
   const [quote, setQuote] = useState<Array<Quote> | undefined>();
-  const [quoteAmount, setQuoteAmount] = useState<number>(1);
+
+  function updateQuoteFromFetchQuotes(quoteAmount: number) {
+    fetchQuotes(quoteAmount).then(setQuote)
+
+  }
 
   useEffect(() => {
     fetchQuotes(1).then(setQuote);
@@ -35,11 +39,8 @@ const Application = () => {
         <InspirationalQuote key={quote.id} content={quote.content} source={quote.source} />
       ))}
       <Quotes
-        onChange={setQuoteAmount}
-        count={quoteAmount}
-        onSubmit={() => {
-          fetchQuotes(quoteAmount).then(setQuote);
-        }}>
+        onSubmit={updateQuoteFromFetchQuotes}
+      >
         <div className="grid grid-cols-2 gap-4"></div>
       </Quotes>
     </main>

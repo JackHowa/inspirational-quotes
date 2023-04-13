@@ -1,11 +1,13 @@
+import { useState } from "react";
 
-const Quotes = ({ children, count, onSubmit, onChange }: any) => {
+const Quotes = ({ children, onSubmit }: any) => {
+  const [quoteAmount, setQuoteAmount] = useState(1)
   return (
     <section className="flex flex-col gap-8">
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          onSubmit();
+          onSubmit(quoteAmount);
         }}
       >
         <label htmlFor="number-of-quotes-to-load" className="block">
@@ -18,8 +20,8 @@ const Quotes = ({ children, count, onSubmit, onChange }: any) => {
             type="number"
             min="0"
             max="25"
-            value={count}
-            onChange={(e) => onChange(e.target.valueAsNumber)}
+            value={quoteAmount}
+            onChange={(e) => setQuoteAmount(e.target.valueAsNumber)}
           />
           <button type="submit">Load Quotes</button>
         </div>
