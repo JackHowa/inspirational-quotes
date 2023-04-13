@@ -1,4 +1,3 @@
-import { useState } from 'react';
 
 const Quotes = ({ children, count, onSubmit, onChange }: any) => {
   return (
@@ -6,7 +5,7 @@ const Quotes = ({ children, count, onSubmit, onChange }: any) => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          onChange(e);
+          onSubmit();
         }}
       >
         <label htmlFor="number-of-quotes-to-load" className="block">
@@ -20,7 +19,7 @@ const Quotes = ({ children, count, onSubmit, onChange }: any) => {
             min="0"
             max="25"
             value={count}
-            onChange={onChange}
+            onChange={(e) => onChange(e.target.valueAsNumber)}
           />
           <button type="submit">Load Quotes</button>
         </div>

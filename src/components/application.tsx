@@ -20,19 +20,27 @@ export const fetchQuotes = async (count: number) => {
 };
 
 const Application = () => {
-  const [quote, setQuote] = useState();
+  const [quote, setQuote] = useState<Array<Quote> | undefined>();
+  const [quoteAmount, setQuoteAmount] = useState<number>(1);
 
   useEffect(() => {
-    fetchRandomQuote().then(setQuote);
+    fetchQuotes(1).then(setQuote);
   }, []);
 
   if (!quote) return <Loading />;
+
   return (
     <main className="w-full max-w-2xl py-16 mx-auto">
-      {/* <InspirationalQuote content={quote.content} source={quote.source} /> */}
-      {/* <Quotes>
+      {quote.map(quote => (
+        <InspirationalQuote key={quote.id} content={quote.content} source={quote.source} />
+      ))}
+      <Quotes
+        onChange={setQuoteAmount}
+        onSubmit={() => {
+          fetchQuotes(quoteAmount).then(setQuote);
+        }}>
         <div className="grid grid-cols-2 gap-4"></div>
-      </Quotes> */}
+      </Quotes>
     </main>
   );
 };
