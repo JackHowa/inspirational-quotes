@@ -36,6 +36,7 @@ const Application = () => {
       ))}
       <Quotes
         onChange={setQuoteAmount}
+        count={quoteAmount}
         onSubmit={() => {
           fetchQuotes(quoteAmount).then(setQuote);
         }}>
