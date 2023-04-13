@@ -1,6 +1,9 @@
-import { useState } from "react";
+import {  useState } from "react";
 
-const Quotes = ({ children, onSubmit }: any) => {
+type QuoteProps = {
+  onSubmit: (quoteAmount: number) => void;
+}
+const Quotes = ({ onSubmit } : QuoteProps ) => {
   const [quoteAmount, setQuoteAmount] = useState<number>(1)
   return (
     <section className="flex flex-col gap-8">
@@ -18,7 +21,7 @@ const Quotes = ({ children, onSubmit }: any) => {
             id="number-of-quotes-to-load"
             className="w-full"
             type="number"
-            min="0"
+            min="1"
             max="25"
             value={quoteAmount}
             onChange={(e) => setQuoteAmount(e.target.valueAsNumber)}
@@ -26,7 +29,6 @@ const Quotes = ({ children, onSubmit }: any) => {
           <button type="submit">Load Quotes</button>
         </div>
       </form>
-      <div className="grid grid-cols-2 gap-4">{children}</div>
     </section>
   );
 };
